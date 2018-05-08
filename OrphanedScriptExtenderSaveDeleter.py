@@ -30,7 +30,7 @@ class OrphanedScriptExtenderSaveDeleter(mobase.IPluginTool):
         return self.__tr("Deletes script extender saves which don't have a corresponding base game save.")
 
     def version(self):
-        return mobase.VersionInfo(1, 0, 0, mobase.ReleaseType.beta)
+        return mobase.VersionInfo(1, 0, 0, mobase.ReleaseType.final)
 
     def isActive(self):
         return True
@@ -61,11 +61,16 @@ class OrphanedScriptExtenderSaveDeleter(mobase.IPluginTool):
         gameSavesDirectory = managedGame.savesDirectory().absolutePath()
         if self.__organizer.profile().localSavesEnabled():
             gameSavesDirectory = os.path.join(self.__organizer.profile().absolutePath(), "saves")
+        count = 0
         for cosave in glob(os.path.join(gameSavesDirectory, "*." + skseSaveExtension)):
             saveName = os.path.splitext(cosave)[0]
             if not os.path.isfile(saveName + "." + gameSaveExtension):
                 os.remove(cosave)
-        QMessageBox.information(self.__parentWidget, self.__tr("Orphaned script extender saves removed"), self.__tr("Orphaned script extender co-saves removed successfully."))
+                count += 1
+        if count == 0:
+            QMessageBox.information(self.__parentWidget, self.__tr("No orphaned script extender saves found"), self.__tr("No orphaned script extender co-saves were found, so none were removed."))
+        else:
+            QMessageBox.information(self.__parentWidget, self.__tr("Orphaned script extender saves removed"), self.__tr("{0} orphaned script extender co-save(s) removed successfully.").format(count))
     
     def __tr(self, str):
         return QCoreApplication.translate("OrphanedScriptExtenderSaveDeleter", str)
