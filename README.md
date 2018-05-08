@@ -8,5 +8,6 @@ Just put the `.py` file in your Mod Organizer plugins directory.
 Choose this plugin from the Mod Organizer Tools dropdown and click 'Okay' until it's done, reading the text that pops up if you feel like doing that, too.
 
 ## Translating this
-I guess I'll put this on Transifex if anyone actually uses this.
-Just ask me if it's not done and you want it done.
+This plugin can be translated online at https://www.transifex.com/anyoldname3/mod-organizer-orphaned-script-extender-save-deleter.
+If you wish to provide a translation for a new language, there should be an option to request a language on that page.
+Once translations are complete, I'll process them and include them with the next release.
