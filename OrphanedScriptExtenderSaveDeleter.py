@@ -1,7 +1,5 @@
 import sys
 
-from glob import glob
-
 from PyQt5.QtCore import QCoreApplication, qDebug
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
@@ -62,6 +60,7 @@ class OrphanedScriptExtenderSaveDeleter(mobase.IPluginTool):
         if self.__organizer.profile().localSavesEnabled():
             gameSavesDirectory = os.path.join(self.__organizer.profile().absolutePath(), "saves")
         count = 0
+        from glob import glob
         for cosave in glob(os.path.join(gameSavesDirectory, "*." + skseSaveExtension)):
             saveName = os.path.splitext(cosave)[0]
             if not os.path.isfile(saveName + "." + gameSaveExtension):
